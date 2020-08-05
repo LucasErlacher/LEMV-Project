@@ -8,7 +8,7 @@ namespace LEMV.Data.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<Project> builder)
         {
-            builder.HasKey(x => x.Idade);
+            builder.HasKey(x => x.Id);
         }
     }
 }

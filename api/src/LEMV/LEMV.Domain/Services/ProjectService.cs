@@ -3,28 +3,13 @@ using LEMV.Domain.Interfaces;
 
 namespace LEMV.Domain.Services
 {
-    public class ProjectService : BaseService, IProjectService
+    public class ProjectService : BaseService<Project>, IProjectService
     {
         public ProjectService(INotificator notificator) : base(notificator)
         {
         }
 
-        public void Add(Project project)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Get(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Update(Project project)
+        public bool RequestProject(string id)
         {
             throw new System.NotImplementedException();
         }
