@@ -26,10 +26,10 @@ namespace LEMV.Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddDependencyInjection(Configuration);
-            services.AddAutoMapper(typeof(Startup).Assembly);
-            services.AddIdentityJwt();
-            services.AddControllers();
+            services.AddDependencyInjection(Configuration)
+                    .AddAutoMapper(typeof(Startup).Assembly)
+                    .AddIdentityJwt()
+                    .AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
