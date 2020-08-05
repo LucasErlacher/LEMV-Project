@@ -33,11 +33,11 @@ namespace LEMV.Api.Controllers
         [HttpPost("SignIn")]
         public async Task<IActionResult> SignInAsync(LoginViewModel login)
         {
-            if (AutenticateAD(login.Email, login.Senha))
+            if (AutenticateAD(login.Usuario, login.Senha))
             {
-                await CreateUserAD(login.Email);
+                await CreateUserAD(login.Usuario);
 
-                var user = await _userManager.FindByNameAsync(login.Email);
+                var user = await _userManager.FindByNameAsync(login.Usuario);
 
                 //await _signInManager.SignInAsync(user, false);
 
