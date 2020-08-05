@@ -2,6 +2,7 @@
 using LEMV.Api.ViewModels;
 using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -33,10 +34,11 @@ namespace LEMV.Api.Controllers
             return new object[] { entity, viewModel };
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return "Está autenticado";
         }
 
         [HttpPost]
