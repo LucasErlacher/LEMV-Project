@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEMV.Domain", "LEMV.Domain\LEMV.Domain.csproj", "{C7101E93-5E90-4E5F-9B3A-BA646464DDC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LEMV.Domain", "LEMV.Domain\LEMV.Domain.csproj", "{C7101E93-5E90-4E5F-9B3A-BA646464DDC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEMV.Data", "LEMV.Data\LEMV.Data.csproj", "{4126306B-851D-4485-9EE3-887C4641A6D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LEMV.Data", "LEMV.Data\LEMV.Data.csproj", "{4126306B-851D-4485-9EE3-887C4641A6D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEMV.Api", "LEMV.Api\LEMV.Api.csproj", "{26895C85-F3BA-4262-BEF5-C619B213D4F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LEMV.Api", "LEMV.Api\LEMV.Api.csproj", "{26895C85-F3BA-4262-BEF5-C619B213D4F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - API", "1 - API", "{564535E6-9598-421F-B038-25FAF8482DB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", "{D8472014-A66A-45DB-AB1C-842BC4787211}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Data", "3 - Data", "{7C6863A0-C273-42D9-99A8-492A9D553816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +36,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C7101E93-5E90-4E5F-9B3A-BA646464DDC0} = {D8472014-A66A-45DB-AB1C-842BC4787211}
+		{4126306B-851D-4485-9EE3-887C4641A6D7} = {7C6863A0-C273-42D9-99A8-492A9D553816}
+		{26895C85-F3BA-4262-BEF5-C619B213D4F0} = {564535E6-9598-421F-B038-25FAF8482DB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F2E8797-A0B7-4453-8D1C-B144795FE5E0}

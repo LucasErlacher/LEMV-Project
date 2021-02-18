@@ -1,6 +1,6 @@
-﻿using LEMV.Domain.Interfaces;
+﻿using LEMV.Data.Repositories;
+using LEMV.Domain.Interfaces;
 using LEMV.Domain.Notifications;
-using LEMV.Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LEMV.Api.Configurations
@@ -12,8 +12,8 @@ namespace LEMV.Api.Configurations
         {
             //Injeção de Dependência
             services.AddScoped<INotificator, Notificator>();
-            services.AddScoped<IProjectService, ProjectService>();
-
+            //services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<NewsRepository>();
 
             //AD Config
             var section = configuration.GetSection("ActiveDirectory");

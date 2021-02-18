@@ -41,20 +41,5 @@ namespace LEMV.Domain.Services
 
             return false;
         }
-
-        public virtual T Add(T entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual T Remove(object id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual T Update(T entity)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

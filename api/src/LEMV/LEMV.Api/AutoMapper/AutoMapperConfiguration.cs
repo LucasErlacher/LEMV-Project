@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using LEMV.Api.ViewModels;
-using LEMV.Domain.Entities;
 
 namespace LEMV.Api.AutoMapper
 {
@@ -8,7 +6,7 @@ namespace LEMV.Api.AutoMapper
     {
         public AutoMapperConfiguration()
         {
-            CreateMap<Project, ProjectViewModel>().ReverseMap();
+            //CreateMap<Project, ProjectViewModel>().ReverseMap();
         }
     }
 }

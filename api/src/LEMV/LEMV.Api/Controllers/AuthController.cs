@@ -1,5 +1,6 @@
 ﻿using LEMV.Api.Configurations;
-using LEMV.Api.ViewModels;
+using LEMV.Api.ViewModels.Authentication;
+using LEMV.Domain.Entities.Core;
 using LEMV.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,13 @@ namespace LEMV.Api.Controllers
     public class AuthController : BaseController
     {
         private readonly ActiveDirectory _configurationAD;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
 
         public AuthController(IOptions<ActiveDirectory> configurationAD,
                               INotificator notificator,
-                              SignInManager<IdentityUser> signInManager,
-                              UserManager<IdentityUser> userManager) : base(notificator)
+                              SignInManager<AppUser> signInManager,
+                              UserManager<AppUser> userManager) : base(notificator)
         {
             _configurationAD = configurationAD.Value;
             _signInManager = signInManager;
@@ -59,7 +60,7 @@ namespace LEMV.Api.Controllers
                                                       _configurationAD.Password))
             using (var adUser = UserPrincipal.FindByIdentity(context, user))
             {
-                var identity_user = new IdentityUser
+                var identity_user = new AppUser
                 {
                     UserName = string.IsNullOrWhiteSpace(adUser.EmailAddress) ? "default@email.com" : adUser.SamAccountName,
                     Email = adUser.EmailAddress,
@@ -83,7 +84,7 @@ namespace LEMV.Api.Controllers
             return context.ValidateCredentials(username, password);
         }
 
-        private string GenerateToken(IdentityUser user)
+        private string GenerateToken(AppUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("TESTESUPERSECRETO");

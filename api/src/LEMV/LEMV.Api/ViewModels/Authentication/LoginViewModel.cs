@@ -1,4 +1,4 @@
-﻿namespace LEMV.Api.ViewModels
+﻿namespace LEMV.Api.ViewModels.Authentication
 {
     public class LoginViewModel
     {

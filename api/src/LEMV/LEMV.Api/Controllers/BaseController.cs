@@ -9,9 +9,23 @@ namespace LEMV.Api.Controllers
     {
         protected readonly INotificator _notificator;
 
-        public BaseController(INotificator notificator)
+        protected BaseController(INotificator notificator)
         {
             _notificator = notificator;
+        }
+
+        protected IActionResult CustomResponse(object result)
+        {
+            if (_notificator.HasNotification())
+            {
+                return BadRequest(new
+                {
+                    status = false,
+                    data = _notificator.GetNotifications()
+                });
+            }
+
+            return Ok(new { status = true, data = result });
         }
     }
 }

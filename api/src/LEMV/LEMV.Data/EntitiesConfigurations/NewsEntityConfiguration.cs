@@ -4,11 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LEMV.Data.EntitiesConfigurations
 {
-    public class ProjectEntityConfiguration : IEntityTypeConfiguration<Project>
+    public class NewsEntityConfiguration : IEntityTypeConfiguration<News>
     {
-        public void Configure(EntityTypeBuilder<Project> builder)
+        public void Configure(EntityTypeBuilder<News> builder)
         {
             builder.HasKey(x => x.Id);
+
+            builder.ToTable(nameof(News));
         }
     }
 }
