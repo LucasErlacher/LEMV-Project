@@ -12,7 +12,6 @@ namespace LEMV.Api.Configurations
         {
             //Injeção de Dependência
             services.AddScoped<INotificator, Notificator>();
-            //services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<NewsRepository>();
 
             //AD Config

@@ -13,7 +13,9 @@ namespace LEMV.Data.Context
     {
         public DbSet<News> News { get; set; }
 
-        public ApplicationDbContext(DbContextOptions options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,7 +24,25 @@ namespace LEMV.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var admin = new AppUser
+            {
+                Id = new Guid("ebfb9b86-1244-44de-a43c-47deb09ca55c"),
+                Email = "teste@teste.com",
+                EmailConfirmed = true,
+                LockoutEnabled = true,
+                NormalizedEmail = "teste@teste.com".ToUpper(),
+                UserName = "admin"
+            };
+
+            admin.PasswordHash = new PasswordHasher<AppUser>().HashPassword(admin, "teste");
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+            modelBuilder.Entity<AppUser>().HasData(admin);
+
+            modelBuilder.Entity<Laboratory>().HasData(
+                new Laboratory(new Guid("f2eb7614-f8e9-4509-af0c-27449ecb0a8e"), "Laboratório de Matemática",
+                "Primeiro laboratório registrado no sistema voltado especificamente para o ensino da disciplina de matemática para os alunos do IFES - Vitória."));
 
             base.OnModelCreating(modelBuilder);
         }
