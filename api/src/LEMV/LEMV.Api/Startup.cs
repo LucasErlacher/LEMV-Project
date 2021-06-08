@@ -1,5 +1,5 @@
-using AutoMapper;
 using LEMV.Api.Configurations;
+using LEMV.Application;
 using LEMV.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +27,7 @@ namespace LEMV.Api
             });
 
             services.AddDependencyInjection(Configuration)
-                    .AddAutoMapper(typeof(Startup).Assembly)
+                    .AddAutoMapper(typeof(AssemblyReference).Assembly)
                     .AddIdentityJwt()
                     .AddControllers();
         }

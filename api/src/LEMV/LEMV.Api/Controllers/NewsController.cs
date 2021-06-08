@@ -3,7 +3,6 @@ using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LEMV.Api.Controllers
@@ -19,7 +18,7 @@ namespace LEMV.Api.Controllers
 
         [HttpGet]
         public IActionResult Get()
-        {             
+        {
             return Ok(_newsRepository.GetAll());
         }
 
