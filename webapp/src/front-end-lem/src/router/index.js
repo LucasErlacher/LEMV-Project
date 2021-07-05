@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const Inicio = () => import('../views/Inicio/index.vue')
 const Noticias = () => import('../views/Noticias/index.vue')
+const NoticiaSinglePage = () => import('../views/Noticias/singlePage')
 const Projetos = () => import('../views/Projetos/index.vue')
 const Contato = () => import('../views/Contato/index.vue')
 const SobreNos = () => import('../views/SobreNos/index.vue')
@@ -17,6 +18,11 @@ const routes = [
     path: '/noticias',
     name: 'Noticias',
     component: Noticias
+  },
+  {
+    path: '/noticias/singlepage/:id',
+    name: 'NoticiaSinglePage',
+    component: NoticiaSinglePage
   },
   {
     path: '/projetos',

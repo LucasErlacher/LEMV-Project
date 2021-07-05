@@ -1,9 +1,10 @@
 import axios from 'axios'
 import AuthService from './auth'
+import NewsService from './news'
 
 const API_ENVS = {
   prod: '',
-  deve: '',
+  dev: '',
   local: 'https://60b27e9662ab150017ae2453.mockapi.io/lemv/1/'
 
 }
@@ -26,5 +27,6 @@ httpClient.interceptors.response.use((response) => {
 })
 
 export default {
-  auth: AuthService(httpClient)
+  auth: AuthService(httpClient),
+  news: NewsService(httpClient)
 }

@@ -112,7 +112,7 @@ export default {
           toast.error('Matrícula não encontrada')
         }
         if (errors.status === 401) {
-          toast.error('Matrícula ou senha invalidos')
+          toast.error('Matrícula ou senha invalidas')
         }
         if (errors.status === 400) {
           toast.error('Ops, ocorreu um erro ao tentar realizar o login')
