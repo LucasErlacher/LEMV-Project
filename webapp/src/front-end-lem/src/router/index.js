@@ -7,6 +7,7 @@ const Projetos = () => import('../views/Projetos/index.vue')
 const Contato = () => import('../views/Contato/index.vue')
 const SobreNos = () => import('../views/SobreNos/index.vue')
 const Administrador = () => import('../views/Administrador/index.vue')
+const ProjetoSinglePage = () => import('../views/Projetos/singlePage')
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     path: '/projetos',
     name: 'Projetos',
     component: Projetos
+  },
+  {
+    path: '/projetos/singlepage/:id',
+    name: 'ProjetoSinglePage',
+    component: ProjetoSinglePage
   },
   {
     path: '/contato',

@@ -2,20 +2,58 @@
   <main class="flex-col ">
         <div class="flex flex-col items-center w-full mx-auto px-6 py-8 gap-1">
           <h1 class="text-4xl font-black text-black">Notícias</h1>
-          <card v-for="c in cards" :key="c.id" :title="c.title" :urlImage="c.urlImage" :description="c.description" :authorName="c.authorName" :id="c.id"/>
+            <button @click="filter = !filter" class="focus:outline-none">
+              <span class="inline">Filtrar: </span>
+              <svg xmlns="http://www.w3.org/2000/svg" class=" inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+              </svg>
+            </button>
+            <div v-if="filter" class="grid grid-col-2 items-center md:grid-col-2">
+              <form>
+                <select v-model="categoria">
+                  <option disabled value="">Categoria</option>
+                  <option value="Geometria">Geometria</option>
+                  <option value="Álgebra" >Álgebra</option>
+                  <option value="Trigonometria">Trigonometria</option>
+                  <option value="">Nenhuma</option>
+                </select>
+                <div>
+                  <label type="text">Data Inicio: </label>
+                  <input v-model="dataInicio" type="date">
+                  <label type="text">Data Fim: </label>
+                  <input v-model="dataFim" type="date">
+                </div>
+              </form>
+              <button
+                class="bg-gray-300 rounded-md px-3" @click="getNews">Filtrar
+              </button>
+            </div>
+          <card v-for="c in state.cards" :key="c.id" :title="c.title" :urlImage="c.urlImage" :description="c.description" :authorName="c.authorName" :id="c.id" :redirect="redirect"/>
         </div>
   </main>
 </template>
 
 <script>
 import card from '../../components/Card/index.vue'
+import { reactive } from 'vue'
 import services from '../../services'
 
 export default {
 
   data () {
+    const redirect = 'NoticiaSinglePage'
+    const filter = false
+    const categoria = ''
+    const cards = []
+    const state = reactive({
+      cards
+    })
+
     return {
-      cards: []
+      state,
+      redirect,
+      filter,
+      categoria
     }
   },
 
@@ -23,11 +61,12 @@ export default {
     async getNews () {
       const { data, errors } = await services.news.getNews()
       if (!errors) {
-        this.cards = data
+        this.state.cards = data
       } else {
-        console.log('falha no acesso')
+        console.log(errors)
       }
     }
+
   },
 
   components: { card },

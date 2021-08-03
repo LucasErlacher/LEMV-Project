@@ -1,11 +1,7 @@
 <template>
   <div class="bg-white p-2 w-80 max-w-3xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none p-1">
-    <div v-if="!urlImage"
-        style='background: url("https://envolverde.com.br/wp-content/uploads/matematica-2.png")'
-        class="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-100 bg-center bg-cover"
-    ></div>
-    <div v-else
-        style='background: url("https://envolverde.com.br/wp-content/uploads/matematica-2.png")'
+    <div
+        :style="{backgroundImage: 'url(\'' + urlImage + '\')'}"
         class="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-100 bg-center bg-cover"
     ></div>
     <div class="flex sm:flex-1 flex-col gap-2 p-1">
@@ -34,13 +30,13 @@
 import { useRouter } from 'vue-router'
 
 export default {
-  props: ['id', 'title', 'urlImage', 'description', 'authorName'],
+  props: ['id', 'title', 'urlImage', 'description', 'authorName', 'redirect'],
 
   setup (props) {
     const router = useRouter()
 
     function pushSinglePage (id) {
-      router.push({ name: 'NoticiaSinglePage', params: { id: props.id } })
+      router.push({ name: props.redirect, params: { id: props.id } })
     }
 
     return {
