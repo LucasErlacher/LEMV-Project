@@ -12,6 +12,9 @@
           </div>
         <img alt="Imagem Projeto" class="lg:w-2/6 w-full lg:h-auto h-64 object-cover object-center rounded" :src="projeto.urlImage">
       </div>
+      <div class="lg:w-4/5 mx-auto flex flex-wrap py-10">
+        <carousel :manual="projeto.manual"/>
+      </div>
   </div>
 </section>
 </template>
@@ -19,7 +22,10 @@
 <script>
 import { useRoute } from 'vue-router'
 import services from '../../services'
+import carousel from '../../components/carousel/index.vue'
 export default {
+
+  components: { carousel },
 
   data () {
     const projeto = {}
@@ -33,6 +39,7 @@ export default {
       const { data, errors } = await services.proj.getSingle(this.id)
       if (!errors) {
         this.projeto = data
+        console.log(typeof this.projeto.manual)
       } else {
         console.log(errors)
       }
