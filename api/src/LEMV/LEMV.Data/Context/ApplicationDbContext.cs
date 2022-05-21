@@ -41,7 +41,7 @@ namespace LEMV.Data.Context
             modelBuilder.Entity<AppUser>().HasData(admin);
 
             modelBuilder.Entity<Laboratory>().HasData(
-                new Laboratory(new Guid("f2eb7614-f8e9-4509-af0c-27449ecb0a8e"), "Laboratório de Matemática",
+                new Laboratory(1, "Laboratório de Matemática",
                 "Primeiro laboratório registrado no sistema voltado especificamente para o ensino da disciplina de matemática para os alunos do IFES - Vitória."));
 
             base.OnModelCreating(modelBuilder);

@@ -16,7 +16,7 @@ namespace LEMV.Domain.Entities
         {
         }
 
-        public Laboratory(Guid id, string name, string description) : base(id)
+        public Laboratory(int id, string name, string description) : base(id)
         {
             Name = name;
             Description = description;

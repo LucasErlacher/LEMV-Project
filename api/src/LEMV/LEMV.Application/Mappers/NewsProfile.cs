@@ -11,7 +11,7 @@ namespace LEMV.Application.Mappers
             CreateMap<News, NewsViewModel>();
 
             CreateMap<NewsViewModel, News>()
-                .ConstructUsing(x => new News(x.Id, x.Subject, x.Content, x.AuthorId, x.LaboratoryId, x.CurrentState));
+                .ConstructUsing(x => new News(x.Id, x.Title, x.Description, x.AuthorName, x.UrlImage, x.Text));
         }
     }
 }

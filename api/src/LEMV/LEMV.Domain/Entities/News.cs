@@ -1,86 +1,46 @@
-﻿using LEMV.Domain.Entities.Core;
-using System;
-
-namespace LEMV.Domain.Entities
+﻿namespace LEMV.Domain.Entities
 {
     public class News : Entity
     {
-        public string Subject { get; protected set; }
-        public string Content { get; protected set; }
-        public string YoutubeUrl { get; set; }
-        public Guid AuthorId { get; protected set; }
-        public Guid LaboratoryId { get; protected set; }
-        public PublishState CurrentState { get; protected set; }
+        public string Title { get; protected set; }
+        public string Description { get; protected set; }
+        public string AuthorName { get; protected set; }
+        public string UrlImage { get; protected set; }
+        public string Text { get; protected set; }
 
-        public virtual AppUser Author { get; protected set; }
-        public virtual Laboratory Laboratory { get; protected set; }
-
-        protected News()
+        public News(int id, string title, string description, string authorname, string urlimage, string text) : base(id)
         {
-            /*Entity Framework*/
+            Title = title;
+            Description = description;
+            AuthorName = authorname;
+            UrlImage = urlimage;
+            Text = text;
         }
 
-        public News(Guid id, string subject, string content, Guid authorId, Guid labId) : base(id)
+        public News(int id, string title, string authorName) : base(id)
         {
-            Subject = subject;
-            Content = content;
-            AuthorId = authorId;
-            LaboratoryId = labId;
-
-            CurrentState = PublishState.Draft;
+            Title = title;
+            AuthorName = authorName;
         }
 
-        public News(Guid id, string subject, string content, Guid authorId, Guid labId, PublishState state) : base(id)
+        public void SetTitle(string title)
         {
-            Subject = subject;
-            Content = content;
-            AuthorId = authorId;
-            LaboratoryId = labId;
-
-            CurrentState = state;
+            Title = title;
         }
 
-        public void Publish()
+        public void SetDescription(string description)
         {
-            if (string.IsNullOrEmpty(Subject) || string.IsNullOrEmpty(Content))
-                throw new ArgumentNullException();
-
-            CurrentState = PublishState.Published;
+            Description = description;
         }
 
-        public void Hide()
+        public void SetAuthor(string authorName)
         {
-            if (CurrentState == PublishState.Published)
-                CurrentState = PublishState.Draft;
+            AuthorName = authorName;
         }
 
-        public bool IsPublished()
+        public void SetUrlImage(string url)
         {
-            return CurrentState == PublishState.Published;
+            UrlImage = url;
         }
-
-        public void ChangeSubject(string subject)
-        {
-            if (string.IsNullOrEmpty(subject))
-                throw new ArgumentNullException();
-
-            Subject = subject;
-        }
-
-        public void ChangeContent(string content)
-        {
-            Content = content;
-        }
-
-        public void SetMediaUrl(string url)
-        {
-            YoutubeUrl = url;
-        }
-    }
-
-    public enum PublishState
-    {
-        Draft = 1,
-        Published
     }
 }

@@ -2,7 +2,6 @@
 using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading.Tasks;
 
 namespace LEMV.Data.Repositories
@@ -30,7 +29,7 @@ namespace LEMV.Data.Repositories
             _dbSet.Remove(entity);
         }
 
-        public virtual async Task<TEntity> GetById(Guid id)
+        public virtual async Task<TEntity> GetById(int id)
         {
             return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
         }

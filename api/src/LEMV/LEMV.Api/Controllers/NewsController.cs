@@ -1,18 +1,20 @@
-﻿using LEMV.Data.Repositories;
-using LEMV.Domain.Entities;
+﻿using LEMV.Application.Services.Interfaces;
+using LEMV.Application.ViewModels;
 using LEMV.Domain.Interfaces;
+using LEMV.Domain.Interfaces.Repositories;
+using LEMV.Domain.Notifications;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace LEMV.Api.Controllers
 {
     public class NewsController : BaseController
     {
-        private readonly NewsRepository _newsRepository;
+        private readonly INewsAppService _newsApp;
+        private readonly INewsRepository _newsRepository;
 
-        public NewsController(INotificator notificator, NewsRepository newsRepository) : base(notificator)
+        public NewsController(INotificator notificator, INewsAppService newsApp, INewsRepository newsRepository) : base(notificator)
         {
+            _newsApp = newsApp;
             _newsRepository = newsRepository;
         }
 
@@ -22,38 +24,35 @@ namespace LEMV.Api.Controllers
             return Ok(_newsRepository.GetAll());
         }
 
-        [HttpGet("{id:guid}")]
-        public async Task<IActionResult> Get(Guid id)
+        [HttpGet("{id:int}")]
+        public IActionResult Get(int id)
         {
-            var teste = await _newsRepository.GetById(id);
+            var teste = _newsRepository.GetById(id);
 
             if (teste == null)
-                _notificator.Handle(new Domain.Notifications.Notification("Notícia não encontrada."));
+                _notificator.Handle(new Notification("Notícia não encontrada."));
 
             return CustomResponse(teste);
         }
 
-        [HttpPut()]
-        public async Task<IActionResult> PutAsync(News news)
+        [HttpPost()]
+        public IActionResult PostAsync(NewsViewModel news)
         {
-            var entity = _newsRepository.Update(news);
-            await _newsRepository.SaveChanges();
-            return CustomResponse(entity);
+            NewsViewModel result = _newsApp.CreateNews(news);
+
+            return CustomResponse(result);
+        }
+
+        [HttpPut()]
+        public IActionResult PutAsync(NewsViewModel news)
+        {
+            return CustomResponse(news);
         }
 
         [HttpDelete("{id:guid}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public IActionResult Delete(int id)
         {
-            await _newsRepository.Delete(id);
-            await _newsRepository.SaveChanges();
             return CustomResponse(id);
-        }
-
-        public async Task<IActionResult> PostAsync(News news)
-        {
-            var entity = _newsRepository.Add(news);
-            await _newsRepository.SaveChanges();
-            return CustomResponse(entity);
         }
     }
 }
