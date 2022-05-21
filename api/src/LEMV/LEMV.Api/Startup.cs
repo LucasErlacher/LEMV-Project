@@ -26,6 +26,8 @@ namespace LEMV.Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddSwaggerGen();
+
             services.AddDependencyInjection(Configuration)
                     .AddAutoMapper(typeof(AssemblyReference).Assembly)
                     .AddIdentityJwt()
@@ -42,6 +44,9 @@ namespace LEMV.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseAuthentication();
             app.UseAuthorization();

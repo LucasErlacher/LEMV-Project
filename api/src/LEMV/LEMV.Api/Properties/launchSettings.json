@@ -12,7 +12,7 @@
     "Dev IIS": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/news",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "Qas IIS": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/news",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Staging"
       }
@@ -36,7 +36,7 @@
     "LEMV.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/news",
+      "launchUrl": "swagger",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
