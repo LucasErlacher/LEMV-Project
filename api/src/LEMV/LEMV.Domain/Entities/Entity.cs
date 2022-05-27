@@ -4,9 +4,9 @@ namespace LEMV.Domain.Entities
 {
     public abstract class Entity
     {
-        public int Id { get; protected set; }
-        public DateTime CreatedAt { get; protected set; }
-        public DateTime LastMofication { get; protected set; }
+        public int Id { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime LastMofication { get; set; }
 
         public Entity()
         {

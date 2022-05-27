@@ -22,6 +22,22 @@ namespace LEMV.Api.Configurations
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<INewsRepository, NewsRepository>();
 
+            services.AddScoped<IProjectAppService, ProjectAppService>();
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+
+            services.AddScoped<IMaterialAppService, MaterialAppService>();
+            services.AddScoped<IMaterialService, MaterialService>();
+            services.AddScoped<IMaterialRepository, MaterialRepository>();
+
+            services.AddScoped<IBookAppService, BookAppService>();
+            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IBookRepository, BookRepository>();
+
+            services.AddScoped<IPaperAppService, PaperAppService>();
+            services.AddScoped<IPaperService, PaperService>();
+            services.AddScoped<IPaperRepository, PaperRepository>();
+
 
             //AD Config
             var section = configuration.GetSection("ActiveDirectory");

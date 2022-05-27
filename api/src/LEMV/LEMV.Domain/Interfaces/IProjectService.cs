@@ -1,10 +1,11 @@
-﻿namespace LEMV.Domain.Interfaces
+﻿using LEMV.Domain.Entities;
+
+namespace LEMV.Domain.Interfaces
 {
     public interface IProjectService
     {
-        //Optar por colocar métodos de negócio nas interfaces especializadas
-
-        //Exemplo de métodos:       
-        bool RequestProject(string id);
+        Project Create(Project entity);
+        Project Update(Project entity);
+        void Delete(int id);
     }
 }

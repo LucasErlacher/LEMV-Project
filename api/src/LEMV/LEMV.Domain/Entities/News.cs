@@ -2,11 +2,11 @@
 {
     public class News : Entity
     {
-        public string Title { get; protected set; }
-        public string Description { get; protected set; }
-        public string AuthorName { get; protected set; }
-        public string UrlImage { get; protected set; }
-        public string Text { get; protected set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string AuthorName { get; set; }
+        public string UrlImage { get; set; }
+        public string Text { get; set; }
 
         public News(int id, string title, string description, string authorname, string urlimage, string text) : base(id)
         {
@@ -21,26 +21,6 @@
         {
             Title = title;
             AuthorName = authorName;
-        }
-
-        public void SetTitle(string title)
-        {
-            Title = title;
-        }
-
-        public void SetDescription(string description)
-        {
-            Description = description;
-        }
-
-        public void SetAuthor(string authorName)
-        {
-            AuthorName = authorName;
-        }
-
-        public void SetUrlImage(string url)
-        {
-            UrlImage = url;
         }
     }
 }
