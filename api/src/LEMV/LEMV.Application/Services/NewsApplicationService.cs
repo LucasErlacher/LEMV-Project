@@ -22,13 +22,25 @@ namespace LEMV.Application.Services
 
         public NewsViewModel CreateNews(NewsViewModel news)
         {
-            news.Id = _newsRepository.GenerateId();
-
             var entity = _mapper.Map<News>(news);
 
             entity = _service.Create(entity);
 
             return _mapper.Map<NewsViewModel>(entity);
+        }
+
+        public NewsViewModel UpdateNews(NewsViewModel news)
+        {
+            var entity = _mapper.Map<News>(news);
+
+            entity = _service.Update(entity);
+
+            return _mapper.Map<NewsViewModel>(entity);
+        }
+
+        public void DeleteNews(int id)
+        {
+            _service.Delete(id);
         }
     }
 }

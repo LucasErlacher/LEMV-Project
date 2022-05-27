@@ -1,6 +1,5 @@
 ﻿using LEMV.Application.Services;
 using LEMV.Application.Services.Interfaces;
-using LEMV.Data.Context;
 using LEMV.Data.Repositories;
 using LEMV.Domain.Interfaces;
 using LEMV.Domain.Interfaces.Repositories;
@@ -15,8 +14,7 @@ namespace LEMV.Api.Configurations
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services,
                                                                 Microsoft.Extensions.Configuration.IConfiguration configuration)
         {
-            //Injeção de Dependência
-            services.AddSingleton<IFakeDatabase, FakeDatabase>();
+            //Injeção de Dependência            
             services.AddScoped<INotificator, Notificator>();
 
 

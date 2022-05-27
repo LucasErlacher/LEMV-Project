@@ -46,12 +46,16 @@ namespace LEMV.Api.Controllers
         [HttpPut()]
         public IActionResult PutAsync(NewsViewModel news)
         {
-            return CustomResponse(news);
+            NewsViewModel result = _newsApp.UpdateNews(news);
+
+            return CustomResponse(result);
         }
 
-        [HttpDelete("{id:guid}")]
+        [HttpDelete("{id:int}")]
         public IActionResult Delete(int id)
         {
+            _newsApp.DeleteNews(id);
+
             return CustomResponse(id);
         }
     }

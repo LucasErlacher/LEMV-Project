@@ -1,9 +1,8 @@
 using LEMV.Api.Configurations;
 using LEMV.Application;
-using LEMV.Data.Context;
+using LiteDB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,9 +20,9 @@ namespace LEMV.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddTransient(p =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                return new LiteDatabase(Configuration.GetConnectionString("LiteDB"));
             });
 
             services.AddSwaggerGen();

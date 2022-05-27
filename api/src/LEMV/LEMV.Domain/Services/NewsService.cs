@@ -15,9 +15,19 @@ namespace LEMV.Domain.Services
 
         public News Create(News entity)
         {
-            _newsRepository.Create(entity);
+            return _newsRepository.Add(entity); ;
+        }
 
-            return entity;
+        public News Update(News entity)
+        {
+            return _newsRepository.Update(entity);
+        }
+
+        public void Delete(int id)
+        {
+            _newsRepository.Delete(id);
+
+            return;
         }
     }
 }

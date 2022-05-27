@@ -1,47 +1,63 @@
-﻿using LEMV.Data.Context;
-using LEMV.Domain.Entities;
+﻿using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+using LiteDB;
+using System;
+using System.Collections.Generic;
 
 namespace LEMV.Data.Repositories
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity>
+    public abstract class Repository<TEntity> : IRepository<TEntity>, IDisposable
         where TEntity : Entity
     {
-        protected readonly DbContext _db;
-        protected readonly DbSet<TEntity> _dbSet;
+        protected string _collection;
 
-        protected Repository(ApplicationDbContext dbContext)
+        protected LiteDatabase _db;
+        protected ILiteCollection<TEntity> _dbSet;
+
+        protected Repository(LiteDatabase dbContext)
         {
             _db = dbContext;
-            _dbSet = dbContext.Set<TEntity>();
+        }
+
+        protected void DefineCollection(string collectionName)
+        {
+            _collection = collectionName;
+            _dbSet = _db.GetCollection<TEntity>(_collection);
         }
 
         public virtual TEntity Add(TEntity entity)
         {
-            return _dbSet.Add(entity).Entity;
+            _dbSet.Insert(entity);
+
+            return GetById(entity.Id);
         }
 
-        public virtual async Task Delete(params object[] id)
+        public virtual void Delete(object id)
         {
-            var entity = await _dbSet.FindAsync(id);
-            _dbSet.Remove(entity);
+            _dbSet.Delete(new BsonValue(id));
         }
 
-        public virtual async Task<TEntity> GetById(int id)
+        public IEnumerable<TEntity> GetAll()
         {
-            return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            return _dbSet.Query().ToList();
+        }
+
+        public virtual TEntity GetById(int id)
+        {
+            return _dbSet.FindOne(x => x.Id == id);
         }
 
         public virtual TEntity Update(TEntity entity)
         {
-            return _dbSet.Update(entity).Entity;
+            _dbSet.Update(entity);
+
+            return GetById(entity.Id);
         }
 
-        public async Task<int> SaveChanges()
+        public void Dispose()
         {
-            return await _db.SaveChangesAsync();
+            if (_db != null)
+                _db.Dispose();
         }
     }
 }
