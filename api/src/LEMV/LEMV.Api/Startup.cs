@@ -31,6 +31,14 @@ namespace LEMV.Api
                     .AddAutoMapper(typeof(AssemblyReference).Assembly)
                     .AddIdentityJwt()
                     .AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("localhost", b => b.AllowAnyOrigin()
+                                                     .AllowAnyMethod()
+                                                     .AllowAnyHeader()
+                                                     .AllowCredentials());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,6 +49,8 @@ namespace LEMV.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("localhost");
 
             app.UseRouting();
 
