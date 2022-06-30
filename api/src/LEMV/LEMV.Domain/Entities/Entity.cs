@@ -10,9 +10,10 @@ namespace LEMV.Domain.Entities
 
         public Entity()
         {
+            CreatedAt = DateTime.Now;
         }
 
-        public Entity(int id)
+        public Entity(int id) : this()
         {
             Id = id;
         }

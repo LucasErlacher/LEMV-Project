@@ -1,6 +1,7 @@
 ﻿using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces;
 using LEMV.Domain.Interfaces.Repositories;
+using System;
 
 namespace LEMV.Domain.Services
 {
@@ -15,6 +16,11 @@ namespace LEMV.Domain.Services
 
         public News Create(News entity)
         {
+            var currentDate = DateTime.Now;
+
+            entity.PublishedIn = currentDate;
+            entity.LastMofication = currentDate;
+
             return _newsRepository.Add(entity); ;
         }
 

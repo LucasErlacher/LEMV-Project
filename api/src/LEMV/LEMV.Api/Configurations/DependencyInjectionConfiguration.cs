@@ -38,6 +38,9 @@ namespace LEMV.Api.Configurations
             services.AddScoped<IPaperService, PaperService>();
             services.AddScoped<IPaperRepository, PaperRepository>();
 
+            services.AddTransient<IFilesAppService, FilesAppService>();
+            services.AddTransient<IFilesService, FilesService>();
+            services.AddTransient<IFilesRepository, FilesRepository>();
 
             //AD Config
             var section = configuration.GetSection("ActiveDirectory");

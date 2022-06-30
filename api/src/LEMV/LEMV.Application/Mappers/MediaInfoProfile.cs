@@ -4,11 +4,11 @@ using LEMV.Domain.Entities;
 
 namespace LEMV.Application.Mappers
 {
-    public class NewsProfile : Profile
+    public class MediaInfoProfile : Profile
     {
-        public NewsProfile()
+        public MediaInfoProfile()
         {
-            CreateMap<News, NewsViewModel>().ReverseMap();
+            CreateMap<MediaInfoViewModel, MediaInfo>().ReverseMap();
         }
     }
 }

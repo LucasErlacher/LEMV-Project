@@ -36,8 +36,7 @@ namespace LEMV.Api
             {
                 options.AddPolicy("localhost", b => b.AllowAnyOrigin()
                                                      .AllowAnyMethod()
-                                                     .AllowAnyHeader()
-                                                     .AllowCredentials());
+                                                     .AllowAnyHeader());
             });
         }
 

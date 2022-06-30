@@ -43,7 +43,7 @@ namespace LEMV.Api.Controllers
             return CustomResponse(result);
         }
 
-        [HttpPut()]
+        [HttpPut]
         public IActionResult PutAsync(NewsViewModel news)
         {
             NewsViewModel result = _newsApp.UpdateNews(news);
