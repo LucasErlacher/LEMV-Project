@@ -60,7 +60,7 @@ namespace LEMV.Api.Controllers
             }
         }
 
-        [HttpPost("download/{id:guid}")]
+        [HttpGet("download/{id:guid}")]
         public IActionResult Download(Guid id)
         {
             if (id == Guid.Empty)
