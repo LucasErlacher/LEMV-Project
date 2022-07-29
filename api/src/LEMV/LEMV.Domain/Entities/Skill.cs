@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LiteDB;
+using System.Collections.Generic;
 
 namespace LEMV.Domain.Entities
 {
@@ -6,6 +7,8 @@ namespace LEMV.Domain.Entities
     {
         public string Code { get; set; }
         public string Description { get; set; }
+
+        [BsonRef("abilities")]
         public ICollection<Ability> Abilities { get; set; }
 
         public Skill()

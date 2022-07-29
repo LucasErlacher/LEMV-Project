@@ -36,7 +36,7 @@ namespace LEMV.Data.Repositories
             _dbSet.Delete(new BsonValue(id));
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return _dbSet.Query().ToList();
         }
