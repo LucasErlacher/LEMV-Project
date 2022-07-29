@@ -2,10 +2,5 @@
 
 namespace LEMV.Domain.Interfaces
 {
-    public interface INewsService
-    {
-        News Create(News entity);
-        News Update(News entity);
-        void Delete(int id);
-    }
+    public interface INewsService : IBaseService<News> { }
 }

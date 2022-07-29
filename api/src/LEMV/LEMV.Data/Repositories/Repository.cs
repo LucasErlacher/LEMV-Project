@@ -1,12 +1,11 @@
 ﻿using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces.Repositories;
 using LiteDB;
-using System;
 using System.Collections.Generic;
 
 namespace LEMV.Data.Repositories
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity>, IDisposable
+    public abstract class Repository<TEntity> : IRepository<TEntity>
         where TEntity : Entity
     {
         protected string _collection;

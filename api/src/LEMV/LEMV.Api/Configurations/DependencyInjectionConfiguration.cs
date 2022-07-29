@@ -38,6 +38,10 @@ namespace LEMV.Api.Configurations
             services.AddScoped<IPaperService, PaperService>();
             services.AddScoped<IPaperRepository, PaperRepository>();
 
+            services.AddScoped<ISkillsAppService, SkillsAppService>();
+            services.AddScoped<ISkillsService, SkillsService>();
+            services.AddScoped<ISkillsRepository, SkillsRepository>();
+
             services.AddTransient<IFilesAppService, FilesAppService>();
             services.AddTransient<IFilesService, FilesService>();
             services.AddTransient<IFilesRepository, FilesRepository>();

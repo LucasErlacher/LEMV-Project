@@ -2,7 +2,9 @@
 using FluentValidation.Results;
 using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces;
+using LEMV.Domain.Interfaces.Repositories;
 using LEMV.Domain.Notifications;
+using System;
 
 namespace LEMV.Domain.Services
 {
@@ -10,10 +12,12 @@ namespace LEMV.Domain.Services
         where T : Entity
     {
         private readonly INotificator _notificator;
+        protected readonly IRepository<T> _repository;
 
-        public BaseService(INotificator notificator)
+        public BaseService(INotificator notificator, IRepository<T> repository)
         {
             _notificator = notificator;
+            _repository = repository;
         }
 
         protected void Notify(string message)
@@ -40,6 +44,31 @@ namespace LEMV.Domain.Services
             Notify(result);
 
             return false;
+        }
+
+        public virtual T Create(T entity)
+        {
+            var currentDate = DateTime.Now;
+
+            entity.CreatedAt = currentDate;
+            entity.LastMofication = currentDate;
+
+            return _repository.Add(entity); ;
+        }
+
+        public virtual T Update(T entity)
+        {
+            var currentDate = DateTime.Now;
+            entity.LastMofication = currentDate;
+
+            return _repository.Update(entity);
+        }
+
+        public virtual void Delete(int id)
+        {
+            _repository.Delete(id);
+
+            return;
         }
     }
 }

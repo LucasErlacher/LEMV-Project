@@ -2,5 +2,5 @@
 
 namespace LEMV.Domain.Interfaces
 {
-    public interface IBookService : IBaseService<Book> { }
+    public interface ISkillsService : IBaseService<Skill> { }
 }
