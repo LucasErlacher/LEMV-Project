@@ -20,7 +20,7 @@ namespace LEMV.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient(p =>
+            services.AddScoped(p =>
             {
                 return new LiteDatabase(Configuration.GetConnectionString("LiteDB"));
             });
