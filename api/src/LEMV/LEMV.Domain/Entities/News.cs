@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LEMV.Domain.Entities
 {
@@ -10,6 +11,9 @@ namespace LEMV.Domain.Entities
         public virtual string Text { get; set; }
         public virtual DateTime PublishedIn { get; set; }
         public virtual MediaInfo Media { get; set; }
+
+        public virtual int SkillId { get; set; }
+        public virtual ICollection<int> AbilitieIds { get; set; }
 
         public News() : base()
         {

@@ -1,6 +1,8 @@
-﻿namespace LEMV.Application.ViewModels
+﻿using System.Collections.Generic;
+
+namespace LEMV.Application.ViewModels
 {
-    public class NewsViewModel
+    public class NewsCadastroViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -8,6 +10,7 @@
         public string AuthorName { get; set; }
         public string Text { get; set; }
         public MediaInfoViewModel Media { get; set; }
-        public SkillViewModel Skill { get; set; }
+        public int SkillId { get; set; }
+        public ICollection<int> AbilitieIds { get; set; }
     }
 }
