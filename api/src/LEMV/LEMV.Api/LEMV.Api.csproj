@@ -9,7 +9,6 @@
   <ItemGroup>
     <Compile Remove="Controllers\AuthController.cs" />
     <Compile Remove="Controllers\BookController.cs" />
-    <Compile Remove="Controllers\PaperController.cs" />
   </ItemGroup>
 
   <ItemGroup>

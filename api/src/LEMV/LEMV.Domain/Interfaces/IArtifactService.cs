@@ -2,5 +2,5 @@
 
 namespace LEMV.Domain.Interfaces
 {
-    public interface IPaperService : IBaseService<Paper> { }
+    public interface IArtifactService : IBaseService<Artifact> { }
 }

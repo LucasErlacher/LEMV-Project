@@ -34,9 +34,9 @@ namespace LEMV.Api.Configurations
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IBookRepository, BookRepository>();
 
-            services.AddScoped<IPaperAppService, PaperAppService>();
-            services.AddScoped<IPaperService, PaperService>();
-            services.AddScoped<IPaperRepository, PaperRepository>();
+            services.AddScoped<IArtifactAppService, ArtifactAppService>();
+            services.AddScoped<IArtifactService, ArtifactService>();
+            services.AddScoped<IArtifactRepository, ArtifactRepository>();
 
             services.AddScoped<ISkillsAppService, SkillsAppService>();
             services.AddScoped<ISkillsService, SkillsService>();

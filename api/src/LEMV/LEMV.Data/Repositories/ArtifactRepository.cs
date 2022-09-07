@@ -4,11 +4,11 @@ using LiteDB;
 
 namespace LEMV.Data.Repositories
 {
-    public class PaperRepository : Repository<Paper>, IPaperRepository
+    public class ArtifactRepository : Repository<Artifact>, IArtifactRepository
     {
-        private const string COLLECTION_NAME = "papers";
+        private const string COLLECTION_NAME = "artifacts";
 
-        public PaperRepository(LiteDatabase db) : base(db)
+        public ArtifactRepository(LiteDatabase db) : base(db)
         {
             DefineCollection(COLLECTION_NAME);
         }
