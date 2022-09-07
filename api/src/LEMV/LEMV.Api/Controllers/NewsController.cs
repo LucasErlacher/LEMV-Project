@@ -33,7 +33,7 @@ namespace LEMV.Api.Controllers
         }
 
         [HttpPost()]
-        public IActionResult PostAsync(NewsCadastroViewModel news)
+        public IActionResult PostAsync(NewsSaveViewModel news)
         {
             NewsViewModel result = _newsApp.CreateNews(news);
 
@@ -41,7 +41,7 @@ namespace LEMV.Api.Controllers
         }
 
         [HttpPut]
-        public IActionResult PutAsync(NewsCadastroViewModel news)
+        public IActionResult PutAsync(NewsSaveViewModel news)
         {
             NewsViewModel result = _newsApp.UpdateNews(news);
 

@@ -11,6 +11,8 @@ namespace LEMV.Domain.Entities
         public string UrlImagem { get; set; }
         public string Texto { get; set; }
         public ICollection<ProjectStep> Manual { get; set; }
+        public virtual int SkillId { get; set; }
+        public virtual ICollection<int> AbilitieIds { get; set; }
 
         public Project() { }
 

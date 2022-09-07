@@ -8,7 +8,7 @@ namespace LEMV.Application.Mappers
     {
         public NewsProfile()
         {
-            CreateMap<News, NewsCadastroViewModel>().ReverseMap();
+            CreateMap<News, NewsSaveViewModel>().ReverseMap();
             CreateMap<News, NewsViewModel>().ReverseMap();
         }
     }

@@ -53,7 +53,7 @@ namespace LEMV.Application.Services
             return result;
         }
 
-        public NewsViewModel CreateNews(NewsCadastroViewModel news)
+        public NewsViewModel CreateNews(NewsSaveViewModel news)
         {
             var entity = _mapper.Map<News>(news);
 
@@ -67,7 +67,7 @@ namespace LEMV.Application.Services
             return result;
         }
 
-        public NewsViewModel UpdateNews(NewsCadastroViewModel news)
+        public NewsViewModel UpdateNews(NewsSaveViewModel news)
         {
             var entity = _mapper.Map<News>(news);
 

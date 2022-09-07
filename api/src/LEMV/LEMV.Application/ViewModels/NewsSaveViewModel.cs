@@ -2,7 +2,7 @@
 
 namespace LEMV.Application.ViewModels
 {
-    public class NewsCadastroViewModel
+    public class NewsSaveViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

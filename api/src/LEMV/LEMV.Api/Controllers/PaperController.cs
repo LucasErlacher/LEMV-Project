@@ -36,17 +36,17 @@ namespace LEMV.Api.Controllers
         }
 
         [HttpPost()]
-        public IActionResult PostAsync(ProjetoViewModel news)
+        public IActionResult PostAsync(ProjectViewModel news)
         {
-            ProjetoViewModel result = _projectApp.CreateProject(news);
+            ProjectViewModel result = _projectApp.CreateProject(news);
 
             return CustomResponse(result);
         }
 
         [HttpPut()]
-        public IActionResult PutAsync(ProjetoViewModel news)
+        public IActionResult PutAsync(ProjectViewModel news)
         {
-            ProjetoViewModel result = _projectApp.UpdateProject(news);
+            ProjectViewModel result = _projectApp.UpdateProject(news);
 
             return CustomResponse(result);
         }

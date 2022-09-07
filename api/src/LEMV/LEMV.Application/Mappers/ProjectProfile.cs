@@ -8,7 +8,8 @@ namespace LEMV.Application.Mappers
     {
         public ProjectProfile()
         {
-            CreateMap<Project, ProjetoViewModel>().ReverseMap();
+            CreateMap<Project, ProjectViewModel>().ReverseMap();
+            CreateMap<Project, ProjectSaveViewModel>().ReverseMap();
 
             CreateMap<ProjectStep, ProjectStepViewModel>().ReverseMap();
         }

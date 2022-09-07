@@ -3,6 +3,9 @@ using LEMV.Application.Services.Interfaces;
 using LEMV.Application.ViewModels;
 using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces;
+using LEMV.Domain.Interfaces.Repositories;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LEMV.Application.Services
 {
@@ -10,34 +13,94 @@ namespace LEMV.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IProjectService _service;
+        private readonly IProjectRepository _projectRepository;
+        private readonly ISkillsRepository _skillsRepository;
 
-        public ProjectAppService(IMapper mapper, IProjectService service)
+        public ProjectAppService(IMapper mapper, IProjectService service, IProjectRepository projectRepository, ISkillsRepository skillsRepository)
         {
             _mapper = mapper;
             _service = service;
+            _projectRepository = projectRepository;
+            _skillsRepository = skillsRepository;
         }
 
-        public ProjetoViewModel CreateProject(ProjetoViewModel news)
+        public ProjectViewModel GetById(int id)
+        {
+            var entity = _projectRepository.GetById(id);
+
+            var result = _mapper.Map<ProjectViewModel>(entity);
+
+            result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
+
+            return result;
+        }
+
+        public ICollection<ProjectViewModel> GetAll()
+        {
+            var entities = _projectRepository.GetAll();
+
+            var result = _mapper.Map<ICollection<ProjectViewModel>>(entities);
+
+            foreach (var entity in entities)
+            {
+                if (entity.SkillId == 0 || entity.AbilitieIds == null)
+                    continue;
+
+                var item = result.FirstOrDefault(x => x.Id == entity.Id);
+                item.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
+            }
+
+            return result;
+        }
+
+        public ProjectViewModel CreateProject(ProjectSaveViewModel news)
         {
             var entity = _mapper.Map<Project>(news);
 
             entity = _service.Create(entity);
 
-            return _mapper.Map<ProjetoViewModel>(entity);
+            var result = _mapper.Map<ProjectViewModel>(entity);
+
+            if (entity.SkillId != 0 && entity.AbilitieIds != null)
+                result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
+
+            return result;
         }
 
-        public ProjetoViewModel UpdateProject(ProjetoViewModel news)
+        public ProjectViewModel UpdateProject(ProjectSaveViewModel news)
         {
             var entity = _mapper.Map<Project>(news);
 
             entity = _service.Update(entity);
 
-            return _mapper.Map<ProjetoViewModel>(entity);
+            var result = _mapper.Map<ProjectViewModel>(entity);
+
+            if (entity.SkillId != 0 && entity.AbilitieIds != null)
+                result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
+
+            return result;
         }
 
         public void DeleteProject(int id)
         {
             _service.Delete(id);
+        }
+
+        private SkillViewModel BuildSkill(int skillId, params int[] abilitieIds)
+        {
+            var skill = _skillsRepository.GetById(skillId);
+
+            var resultado = new SkillViewModel
+            {
+                Id = skill.Id,
+                Code = skill.Code,
+                Description = skill.Description,
+                Abilities = _mapper.Map<ICollection<AbilityViewModel>>(
+                    skill.Abilities.Where(x => abilitieIds.Contains(x.Id))
+                )
+            };
+
+            return resultado;
         }
     }
 }
