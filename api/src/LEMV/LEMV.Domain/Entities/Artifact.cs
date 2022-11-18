@@ -4,7 +4,8 @@ namespace LEMV.Domain.Entities
 {
     public class Artifact : Entity
     {
-        public virtual string Title { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Resume { get; set; }
         public virtual string Description { get; set; }
 
         public virtual ICollection<MediaInfo> Medias { get; set; }
@@ -12,15 +13,20 @@ namespace LEMV.Domain.Entities
         public virtual int SkillId { get; set; }
         public virtual ICollection<int> AbilitieIds { get; set; }
 
+        public List<string> Tags { get; set; }
+
         public Artifact()
         {
 
         }
 
-        public Artifact(int id, string title, string description) : base(id)
+        public Artifact(int id, string name, string description, List<string> tags, string resume) : base(id)
         {
-            Title = title;
+            Name = name;
             Description = description;
+            Tags = tags;
+            Resume = resume;
+
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace LEMV.Application.ViewModels
+﻿using System.Collections.Generic;
+
+namespace LEMV.Application.ViewModels
 {
     public class NewsViewModel
     {
@@ -9,5 +11,6 @@
         public string Text { get; set; }
         public MediaInfoViewModel Media { get; set; }
         public SkillViewModel Skill { get; set; }
+        public ICollection<string> Tags { get; set; }
     }
 }

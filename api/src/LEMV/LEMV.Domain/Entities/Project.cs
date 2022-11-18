@@ -1,4 +1,5 @@
 ﻿using LEMV.Domain.Entities.Core;
+using System;
 using System.Collections.Generic;
 
 namespace LEMV.Domain.Entities
@@ -8,11 +9,14 @@ namespace LEMV.Domain.Entities
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public string NomeAutor { get; set; }
-        public string UrlImagem { get; set; }
+        public virtual MediaInfo Media { get; set; }
         public string Texto { get; set; }
         public ICollection<ProjectStep> Manual { get; set; }
         public virtual int SkillId { get; set; }
         public virtual ICollection<int> AbilitieIds { get; set; }
+
+        public List<string> Tags { get; set; }
+
 
         public Project() { }
 
@@ -21,17 +25,20 @@ namespace LEMV.Domain.Entities
             string titulo,
             string descricao,
             string nomeAutor,
-            string urlImagem = "",
+            MediaInfo media,
+            List<string> tags,
             string texto = "",
             ICollection<ProjectStep> manual = null) : base(id)
         {
+
             Id = id;
             Titulo = titulo;
             Descricao = descricao;
             NomeAutor = nomeAutor;
-            UrlImagem = urlImagem;
             Texto = texto;
             Manual = manual ?? new List<ProjectStep>();
+            Media = media;
+            Tags = tags;
         }
 
         public void AdicionarPassos(ProjectStep passo)

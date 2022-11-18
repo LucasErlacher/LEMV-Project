@@ -12,5 +12,7 @@ namespace LEMV.Application.ViewModels
         public MediaInfoViewModel Media { get; set; }
         public ICollection<ProjectStepViewModel> Manual { get; set; }
         public SkillViewModel Skill { get; set; }
+
+        public ICollection<string> Tags { get; set; }
     }
 }

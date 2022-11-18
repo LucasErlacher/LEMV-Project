@@ -13,5 +13,6 @@ namespace LEMV.Application.ViewModels
         public ICollection<ProjectStepViewModel> Manual { get; set; }
         public int SkillId { get; set; }
         public ICollection<int> AbilitieIds { get; set; }
+        public ICollection<string> Tags { get; set; }
     }
 }

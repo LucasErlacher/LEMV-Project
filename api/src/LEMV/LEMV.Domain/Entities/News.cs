@@ -14,13 +14,14 @@ namespace LEMV.Domain.Entities
 
         public virtual int SkillId { get; set; }
         public virtual ICollection<int> AbilitieIds { get; set; }
+        public List<string> Tags { get; set; }
 
         public News() : base()
         {
 
         }
 
-        public News(int id, string title, string description, string authorName, string text, DateTime publishedIn, MediaInfo media) : base(id)
+        public News(int id, string title, string description, string authorName, string text, DateTime publishedIn, MediaInfo media, List<string> tags) : base(id)
         {
             Title = title;
             Description = description;
@@ -28,6 +29,7 @@ namespace LEMV.Domain.Entities
             Text = text;
             PublishedIn = publishedIn;
             Media = media;
+            Tags = tags;
         }
 
         public News(int id, string title, string authorName) : base(id)
