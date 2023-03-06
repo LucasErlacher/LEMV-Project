@@ -1,5 +1,9 @@
+using CloudinaryDotNet;
 using LEMV.Api.Configurations;
 using LEMV.Application;
+using LEMV.Application.Services;
+using LEMV.Application.Services.Cloudinary;
+using LEMV.Application.Services.Interfaces;
 using LiteDB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +28,19 @@ namespace LEMV.Api
             {
                 return new LiteDatabase(Configuration.GetConnectionString("LiteDB"));
             });
+
+            var cloudinarySettings = Configuration.GetSection("CloudinarySettings").Get<CloudinarySettings>();
+
+            services.AddScoped(p =>
+            {
+                return new Account(
+                cloudinarySettings.CloudName,
+                cloudinarySettings.ApiKey,
+                cloudinarySettings.ApiSecret
+            );
+            });
+
+            services.AddScoped<ICloudinaryService, CloudinaryService>();
 
             services.AddSwaggerGen();
 
