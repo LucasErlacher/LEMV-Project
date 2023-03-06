@@ -17,7 +17,6 @@ namespace LEMV.Domain.Entities
 
         public List<string> Tags { get; set; }
 
-
         public Project() { }
 
         public Project(
