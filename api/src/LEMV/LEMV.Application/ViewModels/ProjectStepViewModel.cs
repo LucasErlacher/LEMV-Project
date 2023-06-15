@@ -4,9 +4,9 @@ namespace LEMV.Application.ViewModels
 {
     public class ProjectStepViewModel
     {
-        public int Ordem { get; set; }
-        public string NomeEtapa { get; set; }
-        public string Descricao { get; set; }
-        public ICollection<string> Materiais { get; set; }
+        public int Order { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public ICollection<string> Materials { get; set; }
     }
 }

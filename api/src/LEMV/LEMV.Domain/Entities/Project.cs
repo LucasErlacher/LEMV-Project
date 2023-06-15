@@ -6,11 +6,13 @@ namespace LEMV.Domain.Entities
 {
     public class Project : Entity, IAggregateRoot
     {
-        public string Titulo { get; set; }
-        public string Descricao { get; set; }
-        public string NomeAutor { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Resume { get; set; }
+        public string UrlImage { get; set; }
+        public string AuthorName { get; set; }
         public virtual MediaInfo Media { get; set; }
-        public string Texto { get; set; }
+
         public ICollection<ProjectStep> Manual { get; set; }
         public virtual int SkillId { get; set; }
         public virtual ICollection<int> AbilitieIds { get; set; }
@@ -23,18 +25,20 @@ namespace LEMV.Domain.Entities
             int id,
             string titulo,
             string descricao,
+            string resume,
+            string urlImage,
             string nomeAutor,
             MediaInfo media,
             List<string> tags,
-            string texto = "",
             ICollection<ProjectStep> manual = null) : base(id)
         {
 
             Id = id;
-            Titulo = titulo;
-            Descricao = descricao;
-            NomeAutor = nomeAutor;
-            Texto = texto;
+            UrlImage = urlImage;
+            Title = titulo;
+            Description = descricao;
+            AuthorName = nomeAutor;
+            Resume = resume;
             Manual = manual ?? new List<ProjectStep>();
             Media = media;
             Tags = tags;

@@ -8,7 +8,9 @@ namespace LEMV.Domain.Entities
         public virtual string Resume { get; set; }
         public virtual string Description { get; set; }
 
-        public virtual ICollection<MediaInfo> Medias { get; set; }
+        public virtual List<string> UrlImages { get; set; }
+
+        public virtual MediaInfo Media { get; set; }
 
         public virtual int SkillId { get; set; }
         public virtual ICollection<int> AbilitieIds { get; set; }
@@ -20,9 +22,10 @@ namespace LEMV.Domain.Entities
 
         }
 
-        public Artifact(int id, string name, string description, List<string> tags, string resume) : base(id)
+        public Artifact(int id, string name, string description, List<string> tags, string resume, List<string> urlImages) : base(id)
         {
             Name = name;
+            UrlImages = urlImages;
             Description = description;
             Tags = tags;
             Resume = resume;

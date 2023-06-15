@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace LEMV.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CloudinaryController : ControllerBase
 {
         private readonly ICloudinaryService _cloudinaryService;

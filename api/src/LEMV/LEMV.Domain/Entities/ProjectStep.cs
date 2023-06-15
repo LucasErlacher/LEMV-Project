@@ -5,10 +5,10 @@ namespace LEMV.Domain.Entities
 {
     public class ProjectStep : IAggregate
     {
-        public int Ordem { get; set; }
-        public string NomeEtapa { get; set; }
-        public string Descricao { get; set; }
-        public ICollection<string> Materiais { get; set; }
+        public int Order { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public ICollection<string> Materials { get; set; }
 
         public ProjectStep()
         {
@@ -16,20 +16,20 @@ namespace LEMV.Domain.Entities
 
         public ProjectStep(int ordem, string nomeEtapa, string descricao, ICollection<string> materiais = null)
         {
-            Ordem = ordem;
-            NomeEtapa = nomeEtapa;
-            Descricao = descricao;
-            Materiais = materiais ?? new List<string>();
+            Order = ordem;
+            Name = nomeEtapa;
+            Description = descricao;
+            Materials = materiais ?? new List<string>();
         }
 
         public void AdicionarMateriais(string materiais)
         {
-            Materiais.Add(materiais);
+            Materials.Add(materiais);
         }
 
         public void RemoverMateriais(string materiais)
         {
-            Materiais.Remove(materiais);
+            Materials.Remove(materiais);
         }
     }
 }
