@@ -11,8 +11,9 @@
 
         }
 
-        public Book(int id, string title, string resume, string img) : base(id)
+        public Book(string id, string title, string resume, string img)
         {
+            Id = id;
             Title = title;
             Resume = resume;
             Img = img;

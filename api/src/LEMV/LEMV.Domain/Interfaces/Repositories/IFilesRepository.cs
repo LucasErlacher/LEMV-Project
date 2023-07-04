@@ -1,5 +1,5 @@
 ﻿using LEMV.Domain.Entities;
-using System;
+using MongoDB.Bson;
 using System.IO;
 
 namespace LEMV.Domain.Interfaces.Repositories
@@ -7,7 +7,7 @@ namespace LEMV.Domain.Interfaces.Repositories
     public interface IFilesRepository
     {
         MediaInfo Upload(string fileName, Stream fileStream);
-        void Download(Guid id, Stream fileStream);
-        MediaInfo Details(Guid id);
+        void Download(string id, Stream fileStream);
+        MediaInfo Details(string id);
     }
 }

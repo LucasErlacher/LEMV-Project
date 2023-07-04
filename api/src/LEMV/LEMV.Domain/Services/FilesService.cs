@@ -20,12 +20,12 @@ namespace LEMV.Domain.Services
             return _filesRepository.Upload(fileName, fileStream);
         }
 
-        public void Download(Guid id, Stream fileStream)
+        public void Download(string id, Stream fileStream)
         {
             _filesRepository.Download(id, fileStream);
         }
 
-        public MediaInfo Details(Guid id)
+        public MediaInfo Details(string id)
         {
             return _filesRepository.Details(id);
         }

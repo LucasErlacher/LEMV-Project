@@ -2,6 +2,7 @@
 using LEMV.Application.ViewModels;
 using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces;
+using System.Threading.Tasks;
 
 namespace LEMV.Application.Services
 {
@@ -34,7 +35,7 @@ namespace LEMV.Application.Services
             return _mapper.Map<BookViewModel>(entity);
         }
 
-        public void DeleteBook(int id)
+        public void DeleteBook(string id)
         {
             _service.Delete(id);
         }

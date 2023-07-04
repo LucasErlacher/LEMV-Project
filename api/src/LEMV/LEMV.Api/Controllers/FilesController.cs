@@ -20,26 +20,24 @@ namespace LEMV.Api.Controllers
         }
 
         [HttpPost("upload")]
-        [RequestSizeLimit(110000000)]
+        [RequestSizeLimit(15 * 1024 * 1024)]
         public async Task<IActionResult> Upload(IFormFile file)
         {
             if (file.Length > 0)
             {
                 try
                 {
-                    using (Stream filestream = new MemoryStream())
+                    using Stream filestream = new MemoryStream();
+                    await file.CopyToAsync(filestream);
+                    filestream.Flush();
+
+                    var fileMetadata = _filesAppService.Upload(file.FileName, filestream);
+
+                    return Ok(new
                     {
-                        await file.CopyToAsync(filestream);
-                        filestream.Flush();
-
-                        var fileMetadata = _filesAppService.Upload(file.FileName, filestream);
-
-                        return Ok(new
-                        {
-                            Status = true,
-                            Value = fileMetadata
-                        });
-                    }
+                        Status = true,
+                        Value = fileMetadata
+                    });
                 }
                 catch (Exception ex)
                 {
@@ -60,13 +58,13 @@ namespace LEMV.Api.Controllers
             }
         }
 
-        [HttpGet("download/{id:guid}")]
-        public IActionResult Download(Guid id)
+        [HttpGet("download/{id}")]
+        public IActionResult Download(string id)
         {
-            if (id == Guid.Empty)
+            if (id.Equals(""))
                 return null;
 
-            using MemoryStream file = new MemoryStream();
+            using MemoryStream file = new();
 
             MediaInfoViewModel metadata = _filesAppService.Download(id, file);
 

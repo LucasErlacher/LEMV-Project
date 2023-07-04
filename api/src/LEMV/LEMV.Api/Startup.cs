@@ -4,12 +4,16 @@ using LEMV.Application;
 using LEMV.Application.Services;
 using LEMV.Application.Services.Cloudinary;
 using LEMV.Application.Services.Interfaces;
+using LEMV.Data.Repositories;
+using LEMV.Domain.Interfaces.Repositories;
 using LiteDB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Driver;
+using System.Text.Json.Serialization;
 
 namespace LEMV.Api
 {
@@ -24,12 +28,18 @@ namespace LEMV.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped(p =>
-            {
-                return new LiteDatabase(Configuration.GetConnectionString("LiteDB"));
-            });
+            //services.AddScoped(p =>
+            //{
+            //    return new LiteDatabase(Configuration.GetConnectionString("LiteDB"));
+            //});
 
             var cloudinarySettings = Configuration.GetSection("CloudinarySettings").Get<CloudinarySettings>();
+
+            var connectionString = Configuration.GetConnectionString("mongoDB");
+
+            // Configurar o MongoClient
+
+            services.AddScoped<IMongoClient>(provider => new MongoClient(connectionString));
 
             services.AddScoped(p =>
             {
@@ -41,6 +51,12 @@ namespace LEMV.Api
             });
 
             services.AddScoped<ICloudinaryService, CloudinaryService>();
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
 
             services.AddSwaggerGen();
 

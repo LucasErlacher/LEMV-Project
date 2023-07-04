@@ -11,8 +11,9 @@
 
         }
 
-        public Material(int id, string title, string resume, string img) : base(id)
+        public Material(string id, string title, string resume, string img)
         {
+            Id = id;
             Title = title;
             Resume = resume;
             Img = img;

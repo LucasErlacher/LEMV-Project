@@ -4,7 +4,7 @@ namespace LEMV.Application.ViewModels
 {
     public class NewsViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Title { get; set; }
         public string UrlImage { get; set; }
         public string Description { get; set; }

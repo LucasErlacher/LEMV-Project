@@ -1,6 +1,8 @@
 ﻿using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces.Repositories;
-using LiteDB;
+using MongoDB.Driver;
+using MongoDB.Bson;
+using System.Threading.Tasks;
 
 namespace LEMV.Data.Repositories
 {
@@ -8,9 +10,20 @@ namespace LEMV.Data.Repositories
     {
         private const string COLLECTION_NAME = "projects";
 
-        public ProjectRepository(LiteDatabase db) : base(db)
+        public ProjectRepository(IMongoClient db) : base(db)
         {
             DefineCollection(COLLECTION_NAME);
+
         }
+        public override Project Add(Project entity)
+        {
+            foreach (var step in entity.Manual)
+            {
+                step.Id = ObjectId.GenerateNewId().ToString();
+            }
+            _dbSet.InsertOne(entity);
+            return entity;
+        }
+
     }
 }

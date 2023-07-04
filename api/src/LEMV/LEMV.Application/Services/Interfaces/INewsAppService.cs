@@ -1,5 +1,6 @@
 ﻿using LEMV.Application.ViewModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LEMV.Application.Services.Interfaces
 {
@@ -8,7 +9,7 @@ namespace LEMV.Application.Services.Interfaces
         NewsViewModel CreateNews(NewsSaveViewModel news);
         NewsViewModel UpdateNews(NewsSaveViewModel news);
         ICollection<NewsViewModel> GetAll();
-        NewsViewModel GetById(int id);
-        void DeleteNews(int id);
+        NewsViewModel GetById(string id);
+        void DeleteNews(string id);
     }
 }

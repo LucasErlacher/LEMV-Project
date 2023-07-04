@@ -23,8 +23,8 @@ namespace LEMV.Api.Controllers
             return Ok(_materialRepository.GetAll());
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult Get(int id)
+        [HttpGet("{id}")]
+        public IActionResult Get(string id)
         {
             var teste = _materialRepository.GetById(id);
 
@@ -50,8 +50,8 @@ namespace LEMV.Api.Controllers
             return CustomResponse(result);
         }
 
-        [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
         {
             _materialApp.DeleteMaterial(id);
 

@@ -1,6 +1,6 @@
 ﻿using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces.Repositories;
-using LiteDB;
+using MongoDB.Driver;
 
 namespace LEMV.Data.Repositories
 {
@@ -8,7 +8,7 @@ namespace LEMV.Data.Repositories
     {
         private const string COLLECTION_NAME = "artifacts";
 
-        public ArtifactRepository(LiteDatabase db) : base(db)
+        public ArtifactRepository(IMongoClient db) : base(db)
         {
             DefineCollection(COLLECTION_NAME);
         }

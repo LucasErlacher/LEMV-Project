@@ -24,7 +24,7 @@ namespace LEMV.Application.Services
                 _filesService.Upload(fileName, fileStream));
         }
 
-        public MediaInfoViewModel Download(Guid id, Stream fileStream)
+        public MediaInfoViewModel Download(string id, Stream fileStream)
         {
             _filesService.Download(id, fileStream);
 

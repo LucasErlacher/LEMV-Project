@@ -1,5 +1,6 @@
 ﻿using LEMV.Application.ViewModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LEMV.Domain.Interfaces
 {
@@ -8,7 +9,7 @@ namespace LEMV.Domain.Interfaces
         ArtifactViewModel CreateArtifact(ArtifactSaveViewModel artifact);
         ArtifactViewModel UpdateArtifact(ArtifactSaveViewModel artifact);
         ICollection<ArtifactViewModel> GetAll();
-        ArtifactViewModel GetById(int id);
-        void DeleteArtifact(int id);
+        ArtifactViewModel GetById(string id);
+        void DeleteArtifact(string id);
     }
 }

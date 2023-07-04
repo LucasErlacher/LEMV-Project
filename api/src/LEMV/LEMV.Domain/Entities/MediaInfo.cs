@@ -1,10 +1,11 @@
 ﻿using System;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace LEMV.Domain.Entities
 {
-    public class MediaInfo
+    public class MediaInfo : Entity
     {
-        public Guid FileId { get; set; }
         public string FileName { get; set; }
         public string Format { get; set; }
         public double Size { get; set; } //In Megabytes
@@ -14,12 +15,17 @@ namespace LEMV.Domain.Entities
 
         }
 
-        public MediaInfo(Guid fileId, string fileName, string format, double sizeMegabytes)
+        public MediaInfo(string id, string fileName, string format, double sizeMegabytes)
         {
-            FileId = fileId;
+            Id = id;
             FileName = fileName;
             Format = format;
             Size = sizeMegabytes;
+        }
+
+        internal static MediaInfo FromBsonDocument(BsonDocument asBsonDocument)
+        {
+            throw new NotImplementedException();
         }
     }
 }

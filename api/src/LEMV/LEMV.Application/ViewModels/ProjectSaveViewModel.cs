@@ -4,7 +4,7 @@ namespace LEMV.Application.ViewModels
 {
     public class ProjectSaveViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string AuthorName { get; set; }
@@ -12,8 +12,8 @@ namespace LEMV.Application.ViewModels
         public string UrlImage { get; set; }
         public MediaInfoViewModel Media { get; set; }
         public ICollection<ProjectStepViewModel> Manual { get; set; }
-        public int SkillId { get; set; }
-        public ICollection<int> AbilitieIds { get; set; }
+        public string SkillId { get; set; }
+        public ICollection<string> AbilitieIds { get; set; }
         public ICollection<string> Tags { get; set; }
     }
 }

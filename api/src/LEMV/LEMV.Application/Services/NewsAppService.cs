@@ -6,6 +6,7 @@ using LEMV.Domain.Interfaces;
 using LEMV.Domain.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LEMV.Application.Services
 {
@@ -24,13 +25,14 @@ namespace LEMV.Application.Services
             _newsRepository = newsRepository;
         }
 
-        public NewsViewModel GetById(int id)
+        public NewsViewModel GetById(string id)
         {
-            var entity = _newsRepository.GetById(id);
+            var entity =  _newsRepository.GetById(id);
 
             var result = _mapper.Map<NewsViewModel>(entity);
 
-            result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
+            if (entity != null && !entity.SkillId.Equals("") && entity.AbilitieIds != null)
+                result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
 
             return result;
         }
@@ -43,10 +45,10 @@ namespace LEMV.Application.Services
 
             foreach (var entity in entities)
             {
-                if (entity.SkillId == 0 || entity.AbilitieIds == null)
+                if (entity.SkillId.Equals("")|| entity.AbilitieIds == null)
                     continue;
 
-                var item = result.FirstOrDefault(x => x.Id == entity.Id);
+                var item = result.FirstOrDefault(x => x.Id.Equals(entity.Id));
                 item.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
             }
 
@@ -57,11 +59,11 @@ namespace LEMV.Application.Services
         {
             var entity = _mapper.Map<News>(news);
 
-            entity = _service.Create(entity);
+            entity =  _service.Create(entity);
 
             var result = _mapper.Map<NewsViewModel>(entity);
 
-            if (entity.SkillId != 0 && entity.AbilitieIds != null)
+            if (!entity.SkillId.Equals("") && entity.AbilitieIds != null)
                 result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
 
             return result;
@@ -71,22 +73,22 @@ namespace LEMV.Application.Services
         {
             var entity = _mapper.Map<News>(news);
 
-            entity = _service.Update(entity);
+            entity =  _service.Update(entity);
 
             var result = _mapper.Map<NewsViewModel>(entity);
 
-            if (entity.SkillId != 0 && entity.AbilitieIds != null)
+            if (!entity.SkillId.Equals("") && entity.AbilitieIds != null)
                 result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
 
             return result;
         }
 
-        public void DeleteNews(int id)
+        public void DeleteNews(string id)
         {
             _service.Delete(id);
         }
 
-        private SkillViewModel BuildSkill(int skillId, params int[] abilitieIds)
+        private SkillViewModel BuildSkill(string skillId, params string[] abilitieIds)
         {
             var skill = _skillsRepository.GetById(skillId);
 

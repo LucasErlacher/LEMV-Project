@@ -1,4 +1,5 @@
 ﻿using LEMV.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace LEMV.Domain.Interfaces
 {
@@ -8,6 +9,6 @@ namespace LEMV.Domain.Interfaces
 
         T Update(T entity);
 
-        void Delete(int id);
+        void Delete(string id);
     }
 }

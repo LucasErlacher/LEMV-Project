@@ -1,4 +1,5 @@
 ﻿using LEMV.Application.ViewModels;
+using System.Threading.Tasks;
 
 namespace LEMV.Domain.Interfaces
 {
@@ -6,6 +7,6 @@ namespace LEMV.Domain.Interfaces
     {
         MaterialViewModel CreateMaterial(MaterialViewModel news);
         MaterialViewModel UpdateMaterial(MaterialViewModel news);
-        void DeleteMaterial(int id);
+        void DeleteMaterial(string id);
     }
 }

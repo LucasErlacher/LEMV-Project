@@ -1,10 +1,15 @@
 ﻿using System;
+using LEMV.Domain.Interfaces;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace LEMV.Domain.Entities
 {
     public abstract class Entity
     {
-        public int Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastMofication { get; set; }
 
@@ -13,9 +18,5 @@ namespace LEMV.Domain.Entities
             CreatedAt = DateTime.Now;
         }
 
-        public Entity(int id) : this()
-        {
-            Id = id;
-        }
     }
 }

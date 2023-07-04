@@ -7,6 +7,6 @@ namespace LEMV.Application.Services.Interfaces
     public interface IFilesAppService
     {
         MediaInfoViewModel Upload(string fileName, Stream fileStream);
-        MediaInfoViewModel Download(Guid id, Stream fileStream);
+        MediaInfoViewModel Download(string id, Stream fileStream);
     }
 }

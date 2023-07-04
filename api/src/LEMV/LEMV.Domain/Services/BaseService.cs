@@ -5,6 +5,7 @@ using LEMV.Domain.Interfaces;
 using LEMV.Domain.Interfaces.Repositories;
 using LEMV.Domain.Notifications;
 using System;
+using System.Threading.Tasks;
 
 namespace LEMV.Domain.Services
 {
@@ -46,7 +47,15 @@ namespace LEMV.Domain.Services
             return false;
         }
 
-        public virtual T Create(T entity)
+
+        public void Delete(string id)
+        {
+            _repository.Delete(id);
+
+            return;
+        }
+
+        public T Create(T entity)
         {
             var currentDate = DateTime.Now;
 
@@ -56,19 +65,12 @@ namespace LEMV.Domain.Services
             return _repository.Add(entity); ;
         }
 
-        public virtual T Update(T entity)
+        public T Update(T entity)
         {
             var currentDate = DateTime.Now;
             entity.LastMofication = currentDate;
 
             return _repository.Update(entity);
-        }
-
-        public virtual void Delete(int id)
-        {
-            _repository.Delete(id);
-
-            return;
         }
     }
 }

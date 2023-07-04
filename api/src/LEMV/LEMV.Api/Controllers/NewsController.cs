@@ -3,6 +3,7 @@ using LEMV.Application.ViewModels;
 using LEMV.Domain.Interfaces;
 using LEMV.Domain.Notifications;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace LEMV.Api.Controllers
 {
@@ -21,8 +22,8 @@ namespace LEMV.Api.Controllers
             return Ok(_newsApp.GetAll());
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult Get(int id)
+        [HttpGet("{id}")]
+        public IActionResult Get(string id)
         {
             var teste = _newsApp.GetById(id);
 
@@ -35,7 +36,7 @@ namespace LEMV.Api.Controllers
         [HttpPost()]
         public IActionResult PostAsync(NewsSaveViewModel news)
         {
-            NewsViewModel result = _newsApp.CreateNews(news);
+            NewsViewModel result =  _newsApp.CreateNews(news);
 
             return CustomResponse(result);
         }
@@ -43,13 +44,13 @@ namespace LEMV.Api.Controllers
         [HttpPut]
         public IActionResult PutAsync(NewsSaveViewModel news)
         {
-            NewsViewModel result = _newsApp.UpdateNews(news);
+            NewsViewModel result =  _newsApp.UpdateNews(news);
 
             return CustomResponse(result);
         }
 
-        [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
         {
             _newsApp.DeleteNews(id);
 

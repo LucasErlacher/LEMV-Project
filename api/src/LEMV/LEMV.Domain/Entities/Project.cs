@@ -14,15 +14,15 @@ namespace LEMV.Domain.Entities
         public virtual MediaInfo Media { get; set; }
 
         public ICollection<ProjectStep> Manual { get; set; }
-        public virtual int SkillId { get; set; }
-        public virtual ICollection<int> AbilitieIds { get; set; }
+        public virtual string SkillId { get; set; }
+        public virtual ICollection<string> AbilitieIds { get; set; }
 
         public List<string> Tags { get; set; }
 
         public Project() { }
 
         public Project(
-            int id,
+            string id,
             string titulo,
             string descricao,
             string resume,
@@ -30,7 +30,7 @@ namespace LEMV.Domain.Entities
             string nomeAutor,
             MediaInfo media,
             List<string> tags,
-            ICollection<ProjectStep> manual = null) : base(id)
+            ICollection<ProjectStep> manual = null)
         {
 
             Id = id;

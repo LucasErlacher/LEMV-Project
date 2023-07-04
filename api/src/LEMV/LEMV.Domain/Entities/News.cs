@@ -1,5 +1,8 @@
-﻿using System;
+﻿using LEMV.Domain.Interfaces;
+using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LEMV.Domain.Entities
 {
@@ -14,8 +17,8 @@ namespace LEMV.Domain.Entities
 
         public virtual string Resume { get; set; }
 
-        public virtual int SkillId { get; set; }
-        public virtual ICollection<int> AbilitieIds { get; set; }
+        public virtual string SkillId { get; set; }
+        public virtual ICollection<string> AbilitieIds { get; set; }
         public List<string> Tags { get; set; }
 
         public News() : base()
@@ -23,8 +26,9 @@ namespace LEMV.Domain.Entities
 
         }
 
-        public News(int id, string title, string description, string authorName, DateTime publishedIn, MediaInfo media, List<string> tags, string urlImage, string resume) : base(id)
+        public News(string id, string title, string description, string authorName, DateTime publishedIn, MediaInfo media, List<string> tags, string urlImage, string resume)
         {
+            Id = id;
             Title = title;
             Description = description;
             AuthorName = authorName;
@@ -35,8 +39,9 @@ namespace LEMV.Domain.Entities
             Resume = resume;
         }
 
-        public News(int id, string title, string authorName) : base(id)
+        public News(string id, string title, string authorName)
         {
+            Id = id;
             Title = title;
             AuthorName = authorName;
         }

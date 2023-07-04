@@ -6,6 +6,7 @@ using LEMV.Domain.Interfaces;
 using LEMV.Domain.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LEMV.Application.Services
 {
@@ -24,13 +25,13 @@ namespace LEMV.Application.Services
             _skillsRepository = skillsRepository;
         }
 
-        public ProjectViewModel GetById(int id)
+        public ProjectViewModel GetById(string id)
         {
             var entity = _projectRepository.GetById(id);
 
             var result = _mapper.Map<ProjectViewModel>(entity);
 
-            result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
+            result.Skill =  BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
 
             return result;
         }
@@ -43,11 +44,11 @@ namespace LEMV.Application.Services
 
             foreach (var entity in entities)
             {
-                if (entity.SkillId == 0 || entity.AbilitieIds == null)
+                if (entity.SkillId.Equals("") || entity.AbilitieIds == null)
                     continue;
 
-                var item = result.FirstOrDefault(x => x.Id == entity.Id);
-                item.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
+                var item = result.FirstOrDefault(x => x.Id.Equals(entity.Id));
+                item.Skill =  BuildSkill (entity.SkillId, entity.AbilitieIds.ToArray());
             }
 
             return result;
@@ -61,8 +62,8 @@ namespace LEMV.Application.Services
 
             var result = _mapper.Map<ProjectViewModel>(entity);
 
-            if (entity.SkillId != 0 && entity.AbilitieIds != null)
-                result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
+            if (!entity.SkillId.Equals("") && entity.AbilitieIds != null)
+                result.Skill =  BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
 
             return result;
         }
@@ -75,18 +76,18 @@ namespace LEMV.Application.Services
 
             var result = _mapper.Map<ProjectViewModel>(entity);
 
-            if (entity.SkillId != 0 && entity.AbilitieIds != null)
+            if (!entity.SkillId.Equals("") && entity.AbilitieIds != null)
                 result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
 
             return result;
         }
 
-        public void DeleteProject(int id)
+        public void DeleteProject(string id)
         {
             _service.Delete(id);
         }
 
-        private SkillViewModel BuildSkill(int skillId, params int[] abilitieIds)
+        private SkillViewModel BuildSkill(string skillId, params string[] abilitieIds)
         {
             var skill = _skillsRepository.GetById(skillId);
 

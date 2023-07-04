@@ -16,11 +16,12 @@ namespace LEMV.Domain.Entities
 
         }
 
-        public Skill(int id,
+        public Skill(string id,
                      string code,
                      string description,
-                     ICollection<Ability> abilities) : base(id)
+                     ICollection<Ability> abilities)
         {
+            Id = id;
             Code = code;
             Description = description;
             Abilities = abilities;

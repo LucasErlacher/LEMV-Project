@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace LEMV.Domain.Entities
 {
@@ -12,8 +14,8 @@ namespace LEMV.Domain.Entities
 
         public virtual MediaInfo Media { get; set; }
 
-        public virtual int SkillId { get; set; }
-        public virtual ICollection<int> AbilitieIds { get; set; }
+        public virtual string SkillId { get; set; }
+        public virtual ICollection<string> AbilitieIds { get; set; }
 
         public List<string> Tags { get; set; }
 
@@ -22,8 +24,9 @@ namespace LEMV.Domain.Entities
 
         }
 
-        public Artifact(int id, string name, string description, List<string> tags, string resume, List<string> urlImages) : base(id)
+        public Artifact(string id, string name, string description, List<string> tags, string resume, List<string> urlImages)
         {
+            Id = id;
             Name = name;
             UrlImages = urlImages;
             Description = description;

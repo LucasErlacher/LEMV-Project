@@ -1,4 +1,5 @@
 ﻿using LEMV.Application.ViewModels;
+using System.Threading.Tasks;
 
 namespace LEMV.Application.Services.Interfaces
 {
@@ -6,6 +7,6 @@ namespace LEMV.Application.Services.Interfaces
     {
         SkillViewModel CreateSkill(SkillViewModel news);
         SkillViewModel UpdateSkill(SkillViewModel news);
-        void DeleteSkill(int id);
+        void DeleteSkill(string id);
     }
 }

@@ -3,6 +3,7 @@ using LEMV.Application.Services.Interfaces;
 using LEMV.Application.ViewModels;
 using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces;
+using System.Threading.Tasks;
 
 namespace LEMV.Application.Services
 {
@@ -21,7 +22,7 @@ namespace LEMV.Application.Services
         {
             var entity = _mapper.Map<Skill>(news);
 
-            entity = _service.Create(entity);
+            entity =  _service.Create(entity);
 
             return _mapper.Map<SkillViewModel>(entity);
         }
@@ -35,7 +36,7 @@ namespace LEMV.Application.Services
             return _mapper.Map<SkillViewModel>(entity);
         }
 
-        public void DeleteSkill(int id)
+        public void DeleteSkill(string id)
         {
             _service.Delete(id);
         }

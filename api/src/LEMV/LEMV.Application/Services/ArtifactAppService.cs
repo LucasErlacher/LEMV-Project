@@ -5,6 +5,7 @@ using LEMV.Domain.Interfaces;
 using LEMV.Domain.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LEMV.Application.Services
 {
@@ -23,26 +24,26 @@ namespace LEMV.Application.Services
             _skillsRepository = skillsRepository;
         }
 
-        public ArtifactViewModel GetById(int id)
+        public ArtifactViewModel GetById(string id)
         {
             var entity = _artifactRepository.GetById(id);
 
             var result = _mapper.Map<ArtifactViewModel>(entity);
 
-            result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
+            result.Skill =  BuildSkill (entity.SkillId, entity.AbilitieIds.ToArray());
 
             return result;
         }
 
         public ICollection<ArtifactViewModel> GetAll()
         {
-            var entities = _artifactRepository.GetAll();
+            var entities =  _artifactRepository.GetAll();
 
             var result = _mapper.Map<ICollection<ArtifactViewModel>>(entities);
 
             foreach (var entity in entities)
             {
-                if (entity.SkillId == 0 || entity.AbilitieIds == null)
+                if (entity.SkillId.Equals("") || entity.AbilitieIds == null)
                     continue;
 
                 var item = result.FirstOrDefault(x => x.Id == entity.Id);
@@ -60,7 +61,7 @@ namespace LEMV.Application.Services
 
             var result = _mapper.Map<ArtifactViewModel>(entity);
 
-            if (entity.SkillId != 0 && entity.AbilitieIds != null)
+            if (!entity.SkillId.Equals("") && entity.AbilitieIds != null)
                 result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
 
             return result;
@@ -74,20 +75,20 @@ namespace LEMV.Application.Services
 
             var result = _mapper.Map<ArtifactViewModel>(entity);
 
-            if (entity.SkillId != 0 && entity.AbilitieIds != null)
+            if (!entity.SkillId.Equals("") && entity.AbilitieIds != null)
                 result.Skill = BuildSkill(entity.SkillId, entity.AbilitieIds.ToArray());
 
             return result;
         }
 
-        public void DeleteArtifact(int id)
+        public void DeleteArtifact(string id)
         {
             _service.Delete(id);
         }
 
-        private SkillViewModel BuildSkill(int skillId, params int[] abilitieIds)
+        private SkillViewModel BuildSkill(string skillId, params string[] abilitieIds)
         {
-            var skill = _skillsRepository.GetById(skillId);
+            var skill =  _skillsRepository.GetById(skillId);
 
             var resultado = new SkillViewModel
             {

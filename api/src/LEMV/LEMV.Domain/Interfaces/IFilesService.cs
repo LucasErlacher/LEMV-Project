@@ -7,7 +7,7 @@ namespace LEMV.Domain.Interfaces
     public interface IFilesService
     {
         MediaInfo Upload(string fileName, Stream fileStream);
-        void Download(Guid id, Stream fileStream);
-        MediaInfo Details(Guid id);
+        void Download(string id, Stream fileStream);
+        MediaInfo Details(string id);
     }
 }

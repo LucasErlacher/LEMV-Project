@@ -1,18 +1,24 @@
-﻿namespace LEMV.Domain.Entities
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace LEMV.Domain.Entities
 {
     public class Ability
     {
-        public int Id { get; set; }
-        public string Code { get; set; }
-        public string Description { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        public string Code { get; set; } = null!;
+        public string Description { get; set; } = null!;
 
         public Ability()
         {
 
         }
 
-        public Ability(string code, string description)
+        public Ability(string id, string code, string description)
         {
+            Id = id;
             Code = code;
             Description = description;
         }

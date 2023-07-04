@@ -1,4 +1,5 @@
 ﻿using LEMV.Application.ViewModels;
+using System.Threading.Tasks;
 
 namespace LEMV.Domain.Interfaces
 {
@@ -6,6 +7,6 @@ namespace LEMV.Domain.Interfaces
     {
         BookViewModel CreateBook(BookViewModel news);
         BookViewModel UpdateBook(BookViewModel news);
-        void DeleteBook(int id);
+        void DeleteBook(string id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LEMV.Application.ViewModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LEMV.Application.Services.Interfaces
 {
@@ -8,7 +9,7 @@ namespace LEMV.Application.Services.Interfaces
         ProjectViewModel CreateProject(ProjectSaveViewModel news);
         ProjectViewModel UpdateProject(ProjectSaveViewModel news);
         ICollection<ProjectViewModel> GetAll();
-        ProjectViewModel GetById(int id);
-        void DeleteProject(int id);
+        ProjectViewModel GetById(string id);
+        void DeleteProject(string id);
     }
 }

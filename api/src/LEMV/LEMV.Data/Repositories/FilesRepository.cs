@@ -1,54 +1,65 @@
-﻿using LEMV.Domain.Entities;
+﻿using Abp.MimeTypes;
+using LEMV.Domain.Entities;
 using LEMV.Domain.Interfaces.Repositories;
-using LiteDB;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.GridFS;
 using System;
 using System.IO;
 
 namespace LEMV.Data.Repositories
 {
-    public class FilesRepository : IFilesRepository, IDisposable
+    public class FilesRepository : IFilesRepository
     {
-        private readonly LiteDatabase _db;
+        private readonly IMongoDatabase _database;
+        private readonly IGridFSBucket _gridFS;
 
-        public FilesRepository(LiteDatabase db)
+        public FilesRepository(IMongoClient mongoClient)
         {
-            _db = db;
+            _database = mongoClient.GetDatabase("File");
+            _gridFS = new GridFSBucket(_database);
         }
 
         public MediaInfo Upload(string fileName, Stream fileStream)
         {
             fileStream.Position = 0;
-            var fileMetadata = _db.FileStorage.Upload(Guid.NewGuid().ToString(), fileName, fileStream);
+            var options = new GridFSUploadOptions
+            {
+                Metadata = new BsonDocument
+                {
+                    { "contentType", "image/jpeg" },
+                }
+            };
+            var objectId = _gridFS.UploadFromStream(fileName, fileStream, options);
 
-            return new MediaInfo(
-                Guid.Parse(fileMetadata.Id),
-                fileMetadata.Filename,
-                fileMetadata.MimeType,
-                fileMetadata.Length
-            );
+            return this.Details(objectId.ToString());
         }
 
-        public void Download(Guid id, Stream fileStream)
+        public void Download(string id, Stream fileStream)
         {
-            _db.FileStorage.Download(id.ToString(), fileStream);
+            var objectId = ObjectId.Parse(id);
+            _gridFS.DownloadToStream(objectId, fileStream);
         }
 
-        public MediaInfo Details(Guid id)
+        public MediaInfo Details(string id)
         {
-            var result = _db.FileStorage.FindById(id.ToString());
+            var objectId = ObjectId.Parse(id);
+            var filter = Builders<GridFSFileInfo>.Filter.Eq("_id", objectId);
 
-            return new MediaInfo(
-                Guid.Parse(result.Id),
-                result.Filename,
-                result.MimeType,
-                result.Length
-            );
+            var fileInfo = _gridFS.Find(filter).FirstOrDefault();
+
+            if (fileInfo != null)
+            {
+                return new MediaInfo(
+                    id,
+                    fileInfo.Filename,
+                    format: fileInfo.Metadata["contentType"].AsString,
+                    fileInfo.Length
+                );
+            }
+
+            return null;
         }
 
-        public void Dispose()
-        {
-            if (_db != null)
-                _db.Dispose();
-        }
     }
 }
