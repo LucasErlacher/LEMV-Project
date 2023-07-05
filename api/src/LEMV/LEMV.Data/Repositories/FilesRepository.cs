@@ -20,14 +20,14 @@ namespace LEMV.Data.Repositories
             _gridFS = new GridFSBucket(_database);
         }
 
-        public MediaInfo Upload(string fileName, Stream fileStream)
+        public MediaInfo Upload(string fileName, Stream fileStream, string contentType)
         {
             fileStream.Position = 0;
             var options = new GridFSUploadOptions
             {
                 Metadata = new BsonDocument
                 {
-                    { "contentType", "image/jpeg" },
+                    { "contentType", contentType },
                 }
             };
             var objectId = _gridFS.UploadFromStream(fileName, fileStream, options);

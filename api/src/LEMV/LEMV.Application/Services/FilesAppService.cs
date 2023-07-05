@@ -18,10 +18,10 @@ namespace LEMV.Application.Services
             _filesService = filesService;
         }
 
-        public MediaInfoViewModel Upload(string fileName, Stream fileStream)
+        public MediaInfoViewModel Upload(string fileName, Stream fileStream, string contentType)
         {
             return _mapper.Map<MediaInfoViewModel>(
-                _filesService.Upload(fileName, fileStream));
+                _filesService.Upload(fileName, fileStream, contentType));
         }
 
         public MediaInfoViewModel Download(string id, Stream fileStream)

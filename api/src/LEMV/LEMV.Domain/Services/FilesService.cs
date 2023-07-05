@@ -15,9 +15,9 @@ namespace LEMV.Domain.Services
             _filesRepository = filesRepository;
         }
 
-        public MediaInfo Upload(string fileName, Stream fileStream)
+        public MediaInfo Upload(string fileName, Stream fileStream, string contentType)
         {
-            return _filesRepository.Upload(fileName, fileStream);
+            return _filesRepository.Upload(fileName, fileStream, contentType);
         }
 
         public void Download(string id, Stream fileStream)

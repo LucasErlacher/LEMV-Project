@@ -31,7 +31,7 @@ namespace LEMV.Api.Controllers
                     await file.CopyToAsync(filestream);
                     filestream.Flush();
 
-                    var fileMetadata = _filesAppService.Upload(file.FileName, filestream);
+                    var fileMetadata = _filesAppService.Upload(file.FileName, filestream, file.ContentType);
 
                     return Ok(new
                     {
