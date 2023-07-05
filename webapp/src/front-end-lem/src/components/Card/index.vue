@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-2 w-80 max-w-3xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none p-1">
+  <div class="bg-white w-80 max-w-3xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none p-1">
     <div
         :style="{backgroundImage: 'url(\'' + urlImage + '\')'}"
         class="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-100 bg-center bg-cover"

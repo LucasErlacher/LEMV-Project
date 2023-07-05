@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between">
-    <h1 class="text-2xl font-black text-gray-800"> Entrar com Login IFES
+    <h1 class="text-2xl font-black text-gray-800"> Login
     </h1>
     <button
     class="text-4xl text-gray-600 focus:outline-none"
@@ -105,7 +105,7 @@ export default {
           router.push({ name: 'Administrador' })
           state.isLoading = false
           modal.close()
-          toast.success(data.token)
+          toast.success('Bem vindo!')
           return
         }
         if (errors.status === 404) {

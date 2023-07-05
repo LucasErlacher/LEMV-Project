@@ -1,12 +1,12 @@
 
 <template>
-<swiper :slidesPerView="4" :spaceBetween="30" :pagination='{
+<swiper :navigation="true" :slidesPerView="1" :spaceBetween="30" :pagination='{
   "clickable": true
 }' class="mySwiper">
   <swiper-slide v-for="etapa in manual" :key="etapa.index">
-    <card :nomeEtapa="etapa.nomeEtapa" :descricao="etapa.descricao" :materiais="etapa.materiais"/>
+    <card :nomeEtapa="etapa.name" :descricao="etapa.description" :materiais="etapa.materials"/>
   </swiper-slide>
-  </swiper>
+</swiper>
 </template>
 
 <script>
@@ -14,20 +14,21 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import Card from '../Card/etapaProjeto'
 import 'swiper/components/pagination/pagination.min.css'
+import 'swiper/components/navigation/navigation.min.css'
 
 // Import Swiper styles
 import 'swiper/swiper.scss'
 
 // import Swiper core and required modules
 import SwiperCore, {
-  Pagination
+  Pagination,
+  Navigation
 } from 'swiper/core'
 
-SwiperCore.use([Pagination])
+SwiperCore.use([Pagination, Navigation])
 
 export default {
   props: {
-    // manual = [{ nomeEtapa: '', descricao: '', materais: [''] }]
     manual: {}
   },
   components: {
@@ -36,7 +37,6 @@ export default {
     Card
   },
   mounted () {
-    console.log(this.manual)
   }
 
 }

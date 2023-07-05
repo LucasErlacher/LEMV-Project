@@ -1,12 +1,15 @@
 import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import AdminCard from '../../src/components/Card/adminCard.vue'
+import { useRouter } from 'vue-router'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
+describe('UNIT TEST', () => {
+  it('componente definido', () => {
+    const wrapper = shallowMount(AdminCard, {
+      props: { alias: 'a', description: 'b' },
+      global: {
+        plugins: [useRouter]
+      }
     })
-    expect(wrapper.text()).toMatch(msg)
+    expect(wrapper.vm).toBeDefined()
   })
 })

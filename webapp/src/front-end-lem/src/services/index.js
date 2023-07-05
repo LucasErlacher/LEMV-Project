@@ -2,16 +2,16 @@ import axios from 'axios'
 import AuthService from './auth'
 import NewsService from './news'
 import ProjectsService from './projects'
-
-const API_ENVS = {
-  prod: '',
-  dev: '',
-  local: 'https://60b27e9662ab150017ae2453.mockapi.io/lemv/1/'
-
-}
+import PaperService from './paper'
+import MaterialService from './material'
+import BookService from './book'
+import FileService from './file'
+import SkillService from './skill'
+import ArtifactService from './artifact'
+import ImageService from './image'
 
 const httpClient = axios.create({
-  baseURL: API_ENVS.local
+  baseURL: 'https://localhost:5052/api/'
 })
 
 httpClient.interceptors.response.use((response) => {
@@ -30,5 +30,12 @@ httpClient.interceptors.response.use((response) => {
 export default {
   auth: AuthService(httpClient),
   news: NewsService(httpClient),
-  proj: ProjectsService(httpClient)
+  proj: ProjectsService(httpClient),
+  paper: PaperService(httpClient),
+  material: MaterialService(httpClient),
+  book: BookService(httpClient),
+  file: FileService(httpClient),
+  skill: SkillService(httpClient),
+  art: ArtifactService(httpClient),
+  image: ImageService(httpClient)
 }
